@@ -1,7 +1,6 @@
 package br.com.danielip.urlwipo.repository;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

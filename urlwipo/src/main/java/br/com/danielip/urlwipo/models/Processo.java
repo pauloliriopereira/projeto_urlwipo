@@ -3,7 +3,6 @@ package br.com.danielip.urlwipo.models;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Map;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,16 +26,7 @@ public class Processo {
 	private String titulo;
 	
 	public Processo() {}
-	
-	public Processo(Map<String, String> campos) throws ParseException {
-		this.numPub = campos.get("numPub");
-		this.numInternacional = campos.get("numInternacional");
-		SimpleDateFormat formato = new SimpleDateFormat("dd.MM.yyyy");
-		this.dataPublicacao = (Date) formato.parse(campos.get("dataPublicacao"));
-		this.requerentes = campos.get("requerentes");
-		this.titulo = campos.get("titulo");
-	}
-	
+
 	public Processo(String numPub, String numInternacional, String dataPublicacao, String requerentes, String titulo) throws ParseException {
 		this.numPub = numPub;
 		this.numInternacional = numInternacional;

@@ -1,6 +1,9 @@
 package br.com.danielip.urlwipo.models;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,8 +41,19 @@ public class BuscarHttpClient {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		return constroiProcesso();
+	}
 
-		return new Processo(this.valores);
+	private Processo constroiProcesso() throws ParseException {
+		Processo processo = new Processo();
+		processo.setNumPub(this.valores.get("numPub").replaceAll("/", ""));
+		processo.setNumInternacional(this.valores.get("numInternacional").replaceAll("/", ""));
+		SimpleDateFormat formato = new SimpleDateFormat("dd.MM.yyyy");
+		processo.setDataPublicacao((Date) formato.parse(this.valores.get("dataPublicacao").replaceAll("/", "")));
+		processo.setRequerentes(this.valores.get("requerentes"));
+		processo.setTitulo(this.valores.get("titulo"));
+		return processo;
 	}
 	
 	public void pegaValor(String valor) {
@@ -56,7 +70,7 @@ public class BuscarHttpClient {
 	private static String strArrayToString(String[] strArr) {
 		StringBuilder sb = new StringBuilder();
 		for (String str : strArr) {
-			sb.append(str.trim().replaceAll("/", ""));
+			sb.append(str.trim());
 		}
 		return sb.toString();
 	}
